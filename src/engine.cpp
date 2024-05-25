@@ -59,6 +59,8 @@ void Engine::initVulkan() {
   setupDebugMessenger();
   pickPhysicalDevice();
   createLogicalDevice();
+
+  glfwCreateWindowSurface(_instance, _window.getWindow(), nullptr, &_surface);
 }
 
 void Engine::createLogicalDevice() {

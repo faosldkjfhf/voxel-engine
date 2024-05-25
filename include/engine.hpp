@@ -30,6 +30,7 @@ public:
   void render();
 
 private:
+  VkSurfaceKHR _surface;
   VkDebugUtilsMessengerEXT _debugMessenger;
   VkInstance _instance;
   VkPhysicalDevice _physicalDevice = VK_NULL_HANDLE;
