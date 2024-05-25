@@ -14,6 +14,7 @@ Engine::~Engine() {
     DestroyDebugUtilsMessengerEXT(_instance, _debugMessenger, nullptr);
   }
 
+  vkDestroySurfaceKHR(_instance, _surface, nullptr);
   vkDestroyInstance(_instance, nullptr);
 }
 
@@ -57,10 +58,16 @@ void Engine::initVulkan() {
   }
 
   setupDebugMessenger();
+
+  result = glfwCreateWindowSurface(_instance, _window.getWindow(), nullptr,
+                                   &_surface);
+
+  if (result != VK_SUCCESS) {
+    std::cout << "Error: " << result << std::endl;
+  }
+
   pickPhysicalDevice();
   createLogicalDevice();
-
-  glfwCreateWindowSurface(_instance, _window.getWindow(), nullptr, &_surface);
 }
 
 void Engine::createLogicalDevice() {
